@@ -105,6 +105,9 @@ uninstall:
 # SPHINX DOC
 ###############################################################################
 
+html: sphinx
+	echo done
+
 sphinx:
 	cd doc; make html
 	open doc/build/html/index.html
