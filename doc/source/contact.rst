@@ -1,37 +1,32 @@
 Contact
-=======
+======================================================================
 
 For more info please contact
 
+:Contact:
     Gregor von Laszewski
 
     laszewski@gmail.com
 
-Contributors
--------------
+:Contributors:
 
-* Gregor von Laszewski 
-* Fugang Wang 
-* Allen Streib
-* Koji Tanaka
-* Hyungro Lee
+   * Gregor von Laszewski (laszewski@gmail.com)
+   * Aravindh Varadharaju
+   * Fugang Wang
+   * Sridhar Rajagopalan
+  
 
+Links
+======================================================================
 
-Blog
-----
+:Code: 
+   https://github.com/cloudmesh/vagrant.git
 
-A Blog is located at 
+:Issues:
+   https://github.com/cloudmesh/vagrant/issues
 
-* http://cloudmesh.blogspot.com
+:Milestones: 
+   https://github.com/cloudmesh/vagrant/issues/milestones
 
-Repository
-----------
-
-Repositories are located at 
-
-* https://github.com/cloudmesh
-
-  * `Issues`_
-  * `Milestones`_
-  * `Code`_
-
+:Blog:
+   http://cloudmesh.blogspot.com

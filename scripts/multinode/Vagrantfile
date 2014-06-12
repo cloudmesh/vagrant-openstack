@@ -1,0 +1,83 @@
+######################################################################
+# Name        : Vagrantfile
+# Author      : Cloudmesh Team
+# Description : The code is based on the setup guide from the URL given: 
+#               http://devstack.org/guides/multinode-lab.html
+#             : Requires vagrant-hostmanager plugin
+######################################################################
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+######################################################################
+
+# Check if vagrant-hostmanager plugin is installed. 
+# If not raise an error.
+
+unless Vagrant.has_plugin?("vagrant-hostmanager")
+  raise 'Install vagrant-hostmanager plugin: vagrant plugin install vagrant-hostmanager'
+end
+
+######################################################################
+# Add details about the controler node:
+######################################################################
+
+controllers = [{name: 'controller', ip: '192.168.236.11', memory: '2048', cpu: '2'}]
+
+######################################################################
+# Add details about new worker nodes to the list below:               
+######################################################################
+
+workers = [{name: 'compute1', ip: '192.168.236.12', memory: '1024', cpu: '2'},
+           {name: 'compute2', ip: '192.168.236.13', memory: '1024', cpu: '2'}]
+
+######################################################################
+#   NO MORE AMENDMENTS FROM HERE ON - THANK YOU                       
+######################################################################
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+ 
+  config.vm.box = "precise64"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  config.hostmanager.enabled = true
+   
+  # Turn off shared folders
+  config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
+ 
+ # Begin controller
+  controllers.each do |contrhost|
+    config.vm.define "controller" do |controller_config|
+      controller_config.vm.hostname = contrhost[:name]
+      controller_config.vm.boot_timeout = 600
+      # controller_config.vm.provision "shell", inline: $script
+      # eth1 configured in the 192.168.236.0/24 network
+      controller_config.vm.network "private_network", ip: contrhost[:ip]
+      controller_config.vm.provision "shell", path: "install-controller.sh"
+      controller_config.vm.network "forwarded_port", guest: 80, host: 8000
+      controller_config.vm.network "forwarded_port", guest: 5000, host: 6000
+      controller_config.vm.network "forwarded_port", guest: 8774, host: 8774
+
+      controller_config.vm.provider "virtualbox" do |v|
+          v.customize ["modifyvm", :id, "--memory", contrhost[:memory]]
+          v.customize ["modifyvm", :id, "--cpus", contrhost[:cpu]]
+      end
+    end
+  end
+  # End controller
+
+  # Begin Workers
+  workers.each do |host|
+    config.vm.define host[:name] do |node|
+      node.vm.hostname = host[:name]
+      # node.vm.provision "shell", inline: $script
+      node.vm.network :private_network, ip: host[:ip], netmask: '255.255.255.0'
+      node.vm.provision "shell", path: "install-compute.sh"
+      node.vm.provider "virtualbox" do |v|
+        v.customize ["modifyvm", :id, "--memory", host[:memory]]
+        v.customize ["modifyvm", :id, "--cpus", host[:cpu]]
+        v.customize ["modifyvm", :id, "--nic3", "intnet"]
+      end
+    end
+  end
+  # End Workers
+end
