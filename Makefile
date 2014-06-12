@@ -4,7 +4,7 @@ BASENAME=$(shell basename $(PATHNAME))
 TAG=`cat VERSION.txt`
 
 all:
-	make -f Makefile force
+	make -f Makefile html
 
 
 stats:

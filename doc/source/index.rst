@@ -22,6 +22,12 @@ Introduction
    contact
    doc
 
+   devstack
+   multi
+   multiUsingChef
+   scheduler
+   vagrant
+
 Indices and tables
 ==================
 
