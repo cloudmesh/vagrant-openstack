@@ -9,8 +9,8 @@
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,9 +26,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloudmesh 0.1 documentation" href="index.html" />
 <meta charset='utf-8'>
@@ -59,22 +59,65 @@
             
             
               <li class="dropdown globaltoc-container">
-  <a href="index.html"
-     class="dropdown-toggle"
-     data-toggle="dropdown">Site <b class="caret"></b></a>
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
-    ><ul>
-<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="contact.html#contributors">Contributors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contact.html#blog">Blog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contact.html#repository">Repository</a></li>
-</ul>
-</li>
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html#links">Links</a></li>
 <li class="toctree-l1"><a class="reference internal" href="doc.html">Adding to the Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="doc.html#creating-the-documentation-locally">Creating the documentation locally</a></li>
 <li class="toctree-l2"><a class="reference internal" href="doc.html#rst-documentation">RST Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="doc.html#gh-pages">gh-pages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="doc.html#published-documentation">Published Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="devstack.html">DevStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi.html">Multiworker Devstack for Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#testing-the-setup">Testing the setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#shell-scripts">Shell Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#controller-install-controller-sh">Controller: install-controller.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#compute-install-compute-sh">Compute: install-compute.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#vagrantfile">Vagrantfile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiUsingChef.html">Multi worker DevStack using Vagrant and Chef Cookbooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#openstack-distributions">OpenStack Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#multi-node-openstack-install">Multi-Node OpenStack Install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scheduler.html">Changing the scheduler in openstack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#important-directories-files">Important directories/files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#creating-a-brand-new-scheduler">Creating a brand new scheduler.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#changes-to-the-configuration-file">Changes to the configuration file:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#testing-the-scheduler">Testing the scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#using-the-filtered-scheduler-and-building-a-new-custom-filter">Using the filtered scheduler and building a new custom filter:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#modifying-the-config-file">Modifying the Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#summary">Summary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#deployment-building-a-new-scheduler">Deployment: Building a new scheduler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#deployment-using-existing-filtered-scheduler-with-new-filters">Deployment - Using existing filtered scheduler with new filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#id6">Testing:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vagrant.html#commands">Commands</a></li>
 </ul>
 </li>
 </ul>
@@ -84,8 +127,14 @@
 </li>
               
                 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"><ul>
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Support</a></li>
 </ul>
 </ul>

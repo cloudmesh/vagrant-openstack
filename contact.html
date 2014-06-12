@@ -9,8 +9,8 @@
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,9 +26,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Cloudmesh 0.1 documentation" href="index.html" />
     <link rel="next" title="Adding to the Documentation" href="doc.html" />
@@ -61,22 +61,65 @@
             
             
               <li class="dropdown globaltoc-container">
-  <a href="index.html"
-     class="dropdown-toggle"
-     data-toggle="dropdown">Site <b class="caret"></b></a>
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
-    ><ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Contact</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#contributors">Contributors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#blog">Blog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#repository">Repository</a></li>
-</ul>
-</li>
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#links">Links</a></li>
 <li class="toctree-l1"><a class="reference internal" href="doc.html">Adding to the Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="doc.html#creating-the-documentation-locally">Creating the documentation locally</a></li>
 <li class="toctree-l2"><a class="reference internal" href="doc.html#rst-documentation">RST Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="doc.html#gh-pages">gh-pages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="doc.html#published-documentation">Published Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="devstack.html">DevStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi.html">Multiworker Devstack for Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#testing-the-setup">Testing the setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#shell-scripts">Shell Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#controller-install-controller-sh">Controller: install-controller.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#compute-install-compute-sh">Compute: install-compute.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#vagrantfile">Vagrantfile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiUsingChef.html">Multi worker DevStack using Vagrant and Chef Cookbooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#openstack-distributions">OpenStack Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#multi-node-openstack-install">Multi-Node OpenStack Install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scheduler.html">Changing the scheduler in openstack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#important-directories-files">Important directories/files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#creating-a-brand-new-scheduler">Creating a brand new scheduler.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#changes-to-the-configuration-file">Changes to the configuration file:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#testing-the-scheduler">Testing the scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#using-the-filtered-scheduler-and-building-a-new-custom-filter">Using the filtered scheduler and building a new custom filter:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#modifying-the-config-file">Modifying the Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#summary">Summary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#deployment-building-a-new-scheduler">Deployment: Building a new scheduler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#deployment-using-existing-filtered-scheduler-with-new-filters">Deployment - Using existing filtered scheduler with new filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#id6">Testing:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vagrant.html#commands">Commands</a></li>
 </ul>
 </li>
 </ul>
@@ -86,14 +129,16 @@
 </li>
               
                 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"><ul>
-<li><a class="reference internal" href="#">Contact</a><ul>
-<li><a class="reference internal" href="#contributors">Contributors</a></li>
-<li><a class="reference internal" href="#blog">Blog</a></li>
-<li><a class="reference internal" href="#repository">Repository</a></li>
-</ul>
-</li>
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Contact</a></li>
+<li><a class="reference internal" href="#links">Links</a></li>
 </ul>
 </ul>
 </li>
@@ -144,39 +189,41 @@
   <div class="section" id="contact">
 <h1>Contact<a class="headerlink" href="#contact" title="Permalink to this headline">¶</a></h1>
 <p>For more info please contact</p>
-<blockquote>
-<div><p>Gregor von Laszewski</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Contact:</th><td class="field-body"><p class="first">Gregor von Laszewski</p>
 <p><a class="reference external" href="mailto:laszewski&#37;&#52;&#48;gmail&#46;com">laszewski<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
-</div></blockquote>
-<div class="section" id="contributors">
-<h2>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Gregor von Laszewski</li>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Contributors:</th><td class="field-body"><ul class="first last simple">
+<li>Gregor von Laszewski (<a class="reference external" href="mailto:laszewski&#37;&#52;&#48;gmail&#46;com">laszewski<span>&#64;</span>gmail<span>&#46;</span>com</a>)</li>
+<li>Aravindh Varadharaju</li>
 <li>Fugang Wang</li>
-<li>Allen Streib</li>
-<li>Koji Tanaka</li>
-<li>Hyungro Lee</li>
+<li>Sridhar Rajagopalan</li>
 </ul>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="section" id="blog">
-<h2>Blog<a class="headerlink" href="#blog" title="Permalink to this headline">¶</a></h2>
-<p>A Blog is located at</p>
-<ul class="simple">
-<li><a class="reference external" href="http://cloudmesh.blogspot.com">http://cloudmesh.blogspot.com</a></li>
-</ul>
-</div>
-<div class="section" id="repository">
-<h2>Repository<a class="headerlink" href="#repository" title="Permalink to this headline">¶</a></h2>
-<p>Repositories are located at</p>
-<ul class="simple">
-<li><a class="reference external" href="https://github.com/cloudmesh">https://github.com/cloudmesh</a><ul>
-<li><a href="#id1"><span class="problematic" id="id2">`Issues`_</span></a></li>
-<li><a href="#id3"><span class="problematic" id="id4">`Milestones`_</span></a></li>
-<li><a href="#id5"><span class="problematic" id="id6">`Code`_</span></a></li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="section" id="links">
+<h1>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Code:</th><td class="field-body"><a class="reference external" href="https://github.com/cloudmesh/vagrant.git">https://github.com/cloudmesh/vagrant.git</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Issues:</th><td class="field-body"><a class="reference external" href="https://github.com/cloudmesh/vagrant/issues">https://github.com/cloudmesh/vagrant/issues</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Milestones:</th><td class="field-body"><a class="reference external" href="https://github.com/cloudmesh/vagrant/issues/milestones">https://github.com/cloudmesh/vagrant/issues/milestones</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Blog:</th><td class="field-body"><a class="reference external" href="http://cloudmesh.blogspot.com">http://cloudmesh.blogspot.com</a></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 

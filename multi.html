@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Multiworker Devstack for Vagrant &mdash; Cloudmesh 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Cloudmesh 0.1 documentation" href="index.html" />
+    <link rel="next" title="Multi worker DevStack using Vagrant and Chef Cookbooks" href="multiUsingChef.html" />
+    <link rel="prev" title="DevStack" href="devstack.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><img src="_static/fg-logo-white-24x36.png">
+          Cloudmesh</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html#links">Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc.html">Adding to the Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#creating-the-documentation-locally">Creating the documentation locally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#rst-documentation">RST Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#gh-pages">gh-pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#published-documentation">Published Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="devstack.html">DevStack</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Multiworker Devstack for Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-the-setup">Testing the setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shell-scripts">Shell Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#controller-install-controller-sh">Controller: install-controller.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compute-install-compute-sh">Compute: install-compute.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vagrantfile">Vagrantfile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiUsingChef.html">Multi worker DevStack using Vagrant and Chef Cookbooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#openstack-distributions">OpenStack Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#multi-node-openstack-install">Multi-Node OpenStack Install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scheduler.html">Changing the scheduler in openstack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#important-directories-files">Important directories/files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#creating-a-brand-new-scheduler">Creating a brand new scheduler.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#changes-to-the-configuration-file">Changes to the configuration file:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#testing-the-scheduler">Testing the scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#using-the-filtered-scheduler-and-building-a-new-custom-filter">Using the filtered scheduler and building a new custom filter:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#modifying-the-config-file">Modifying the Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#summary">Summary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#deployment-building-a-new-scheduler">Deployment: Building a new scheduler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#deployment-using-existing-filtered-scheduler-with-new-filters">Deployment - Using existing filtered scheduler with new filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#id6">Testing:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vagrant.html#commands">Commands</a></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Multiworker Devstack for Vagrant</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#testing-the-setup">Testing the setup</a></li>
+<li><a class="reference internal" href="#shell-scripts">Shell Scripts</a><ul>
+<li><a class="reference internal" href="#controller-install-controller-sh">Controller: install-controller.sh</a></li>
+<li><a class="reference internal" href="#compute-install-compute-sh">Compute: install-compute.sh</a></li>
+<li><a class="reference internal" href="#vagrantfile">Vagrantfile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="devstack.html" title="Previous Chapter: DevStack"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; DevStack</span>
+    </a>
+  </li>
+  <li>
+    <a href="multiUsingChef.html" title="Next Chapter: Multi worker DevStack using Vagrant and Chef Cookbooks"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Multi worker Dev... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/multi.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="multiworker-devstack-for-vagrant">
+<h1><a class="toc-backref" href="#id2">Multiworker Devstack for Vagrant</a><a class="headerlink" href="#multiworker-devstack-for-vagrant" title="Permalink to this headline">¶</a></h1>
+<div class="sidebar">
+<p class="first sidebar-title">.</p>
+<div class="contents last topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#multiworker-devstack-for-vagrant" id="id2">Multiworker Devstack for Vagrant</a><ul>
+<li><a class="reference internal" href="#requirements" id="id3">Requirements</a></li>
+<li><a class="reference internal" href="#setup" id="id4">Setup</a></li>
+<li><a class="reference internal" href="#testing-the-setup" id="id5">Testing the setup</a></li>
+<li><a class="reference internal" href="#shell-scripts" id="id6">Shell Scripts</a><ul>
+<li><a class="reference internal" href="#controller-install-controller-sh" id="id7">Controller: install-controller.sh</a></li>
+<li><a class="reference internal" href="#compute-install-compute-sh" id="id8">Compute: install-compute.sh</a></li>
+<li><a class="reference internal" href="#vagrantfile" id="id9">Vagrantfile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>The procedure below deploys Devstack with multiple workers from devstack source code. The vagrant script below sets up a cluster with the following nodes:</p>
+<ul class="simple">
+<li>Controller</li>
+<li>Compute1</li>
+<li>Compute2</li>
+</ul>
+<div class="section" id="requirements">
+<h2><a class="toc-backref" href="#id3">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>Setup a virtual environment using VirtualEnv and activate the environment:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ virtualenv  --no-site-packages ~/ENV
+$ source ~/ENV/bin/activate
+</pre></div>
+</div>
+<p>Get reservation code, VirtualBox, Vagrant, Virtualenv and setup the requirements:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ mkdir ~/github
+$ cd ~/github
+$ git clone https://github.com/cloudmesh/reservation.git
+$ cd reservation
+$ ./install-prereq.sh
+$ pip install -r requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="setup">
+<h2><a class="toc-backref" href="#id4">Setup</a><a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>The setup is easily achieved via cookiecutter, which will
+create a new directory with the appropriate scripts and configuration
+parameters. It will ask you for a number of parameters such as</p>
+<ul class="simple">
+<li>a label, that will be appended to the directory name where the
+scripts are located</li>
+<li>a password for the admin</li>
+<li>a password for the services</li>
+<li>a token for the services</li>
+</ul>
+<p>Please do not use the defaults for the passwords and the tokens, but define your own strong versions.</p>
+<p>To create the directory with the scripts:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd ~/github
+$ cookiecutter https://github.com/cloudmesh/cookiecutter-multinode-devstack.git
+</pre></div>
+</div>
+<p>Than you will find a directory called multinode-&lt;label&gt;</p>
+<p>You can than cd in this directory and inspect the scripts:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd multidevstack-&lt;TAB&gt;
+</pre></div>
+</div>
+<p>Run the command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ vagrant up
+</pre></div>
+</div>
+<p>The command will bring up all the nodes: controller, compute1 and compute2.</p>
+<p>After the successful installation, the Horizon dashboard will be available at:</p>
+<div class="highlight-python"><div class="highlight"><pre>http://192.168.236.11
+</pre></div>
+</div>
+<p>You can use the username &#8220;<strong>admin</strong>&#8221; and password that you have defined with the help of cookiecutter.</p>
+</div>
+<div class="section" id="testing-the-setup">
+<h2><a class="toc-backref" href="#id5">Testing the setup</a><a class="headerlink" href="#testing-the-setup" title="Permalink to this headline">¶</a></h2>
+<p>Log into the controller node:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ vagrant ssh controller
+</pre></div>
+</div>
+<p>Source the openrc file for user admin (openrc configures login credentials suitable for use with the OpenStack command-line tools):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd devstack
+$ source openrc admin admin
+</pre></div>
+</div>
+<p>To list the images available in the setup:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova image-list
+</pre></div>
+</div>
+<p>To list the flavors available in the setup:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova flavor-list
+</pre></div>
+</div>
+<p>To boot an instance in the setup:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova boot --flavor 1 --image &quot;cirros-0.3.1-x86_64-uec&quot; testvm
+</pre></div>
+</div>
+<p>The above command will boot a VM according to the specification given in the above command.</p>
+<p>To view the status of the &#8220;nova boot&#8221; command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova list
+</pre></div>
+</div>
+<p>When the VM is provisioned successfully, the status of the VM will be set to &#8220;ACTIVE&#8221;.</p>
+<p>To log into the provisioned VM, use the login name &#8220;cirros&#8221; and password &#8220;cubswin:)&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ ssh &lt;private-ip&gt; -i cirros
+</pre></div>
+</div>
+<p>To shutdown the provisioned VM:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova stop testvm
+</pre></div>
+</div>
+<p>To start the provisioned VM:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova start testvm
+</pre></div>
+</div>
+<p>To delete the provisioned VM:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova delete testvm
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>To boot an instance on a particular node:</p>
+<div class="last highlight-python"><div class="highlight"><pre>$ nova boot --image cirros-0.3.1-x86_64-uec --flavor 1 --availability-zone nova:compute1 testvm
+</pre></div>
+</div>
+</div>
+<p>Logout of the controller VM:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ exit
+</pre></div>
+</div>
+<p>To shutdown the VMs started by Vagrant:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ vagrant halt
+</pre></div>
+</div>
+<p>To destroy the VMs provisioned by &lt;vagrant up&gt; command:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ vagrant destroy
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>When the VMs are restarted, we will need to run the following on all the nodes to rejoin the screens started by stack.sh:</p>
+<div class="last highlight-python"><div class="highlight"><pre>$ vagrant ssh &lt;node name&gt;
+$ cd devstack
+$ ./rejoin-stack.sh
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="shell-scripts">
+<h2><a class="toc-backref" href="#id6">Shell Scripts</a><a class="headerlink" href="#shell-scripts" title="Permalink to this headline">¶</a></h2>
+<p>The section below shows the contents of the three scripts that would be created when you do &#8220;cookiecutter <a class="reference external" href="https://github.com/cloudmesh/cookiecutter-multinode-devstack.git">https://github.com/cloudmesh/cookiecutter-multinode-devstack.git</a>&#8221;.</p>
+<div class="section" id="controller-install-controller-sh">
+<h3><a class="toc-backref" href="#id7">Controller: install-controller.sh</a><a class="headerlink" href="#controller-install-controller-sh" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://github.com/cloudmesh/reservation/blob/master/scripts/multinode/install-controller.sh">install-controller.sh</a></p>
+<div class="highlight-python"><div class="highlight"><pre>#!/bin/bash
+
+######################################################################
+# Author        : Aravindh Varadharaju
+# Date          : 6th April 2014
+# Purpose       : Controller Script
+# Description : This script is modified from 
+#        http://stackoverflow.com/questions/16768777/can-i-switch-user-in-vagrant-bootstrap-shell-script
+######################################################################
+
+case $(id -u) in
+    0) 
+        #echo &quot;first: running as root&quot;
+        #echo &quot;doing the root tasks...&quot;
+
+        #groupadd stack
+        #useradd -g stack -s /bin/bash -d /opt/stack -m stack
+        #echo &quot;stack ALL=(ALL) NOPASSWD: ALL&quot; &gt;&gt; /etc/sudoers
+
+        sudo ufw disable
+        sudo apt-get -q -y update
+        sudo apt-get install -y git
+        sudo apt-get install -y python-pip
+        
+        git clone https://github.com/openstack-dev/devstack.git
+        chown -R vagrant:vagrant devstack
+   
+        # When creating the stack deployment for the first time,
+        # you are going to see prompts for multiple passwords.
+        # Your results will be stored in the localrc file.
+        # If you wish to bypass this, and provide the passwords up front,
+        # add in the following lines with your own password to the localrc file
+
+        echo &#39;[[local|localrc]]&#39; &gt; local.conf
+        #echo HOST_IP=192.168.236.11 &gt;&gt; local.conf
+        #echo FLAT_INTERFACE=eth0 &gt;&gt; local.conf
+        #echo FIXED_RANGE=10.4.128.0/20 &gt;&gt; local.conf
+        #echo FIXED_NETWORK_SIZE=4096 &gt;&gt; local.conf
+        echo MULTI_HOST=1 &gt;&gt; local.conf
+        echo LOGFILE=/home/vagrant/stack.sh.log &gt;&gt; local.conf
+        echo ADMIN_PASSWORD=labstack &gt;&gt; local.conf
+        echo MYSQL_PASSWORD=supersecret &gt;&gt; local.conf
+        echo RABBIT_PASSWORD=supersecrete &gt;&gt; local.conf
+        echo SERVICE_PASSWORD=supersecrete &gt;&gt; local.conf
+        echo SERVICE_TOKEN=1qaz2wsx &gt;&gt; local.conf
+        #echo FLAT_INTERFACE=eth1 &gt;&gt; local.conf
+        mv local.conf /home/vagrant/devstack
+        chown vagrant:vagrant /home/vagrant/devstack/local.conf
+        
+        #for i in `seq 2 10`; do /opt/stack/nova/bin/nova-manage fixed reserve 10.4.128.$i; done
+        sudo -u vagrant -i $0  # script calling itself as the vagrant user
+        ;;
+    *) 
+        #echo &quot;then: running as vagrant user&quot;
+        #echo &quot;doing the vagrant user&#39;s tasks&quot;
+        #echo &quot;########################################&quot;
+        #echo &quot;I going to run ./stack.sh as `whoami`&quot;
+        #echo &quot;########################################&quot;
+        cd /home/vagrant/devstack
+        ./stack.sh
+        ;;
+esac
+</pre></div>
+</div>
+</div>
+<div class="section" id="compute-install-compute-sh">
+<h3><a class="toc-backref" href="#id8">Compute: install-compute.sh</a><a class="headerlink" href="#compute-install-compute-sh" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://github.com/cloudmesh/reservation/blob/master/scripts/multinode/install-compute.sh">install-compute.sh</a></p>
+<div class="highlight-python"><div class="highlight"><pre>#!/bin/bash
+
+######################################################################
+# Author      : Aravindh Varadharaju
+# Purpose     : Compute Script
+# Description : This script is modified from 
+#        http://stackoverflow.com/questions/16768777/can-i-switch-user-in-vagrant-bootstrap-shell-script
+######################################################################
+case $(id -u) in
+    0) 
+        #echo &quot;first: running as root&quot;
+        #echo &quot;doing the root tasks...&quot;
+
+        #groupadd stack
+        #useradd -g stack -s /bin/bash -d /opt/stack -m stack
+        #echo &quot;stack ALL=(ALL) NOPASSWD: ALL&quot; &gt;&gt; /etc/sudoers
+
+        sudo ufw disable
+        sudo apt-get -q -y update
+        sudo apt-get install -y git
+        sudo apt-get install -y python-pip
+        
+        git clone https://github.com/openstack-dev/devstack.git
+        chown -R vagrant:vagrant devstack
+   
+        # When creating the stack deployment for the first time,
+        # you are going to see prompts for multiple passwords.
+        # Your results will be stored in the localrc file.
+        # If you wish to bypass this, and provide the passwords up front,
+        # add in the following lines with your own password to the localrc file
+
+        echo &#39;[[local|localrc]]&#39; &gt; local.conf
+        #echo HOST_IP=192.168.236.12 &gt;&gt; local.conf
+        #echo FLAT_INTERFACE=eth0 &gt;&gt; local.conf
+        #echo FIXED_RANGE=10.4.128.0/20 &gt;&gt; local.conf
+        #echo FIXED_NETWORK_SIZE=4096 &gt;&gt; local.conf
+        echo MULTI_HOST=1 &gt;&gt; local.conf
+        echo LOGFILE=/home/vagrant/stack.sh.log &gt;&gt; local.conf
+        echo ADMIN_PASSWORD=labstack &gt;&gt; local.conf
+        echo MYSQL_PASSWORD=supersecret &gt;&gt; local.conf
+        echo RABBIT_PASSWORD=supersecrete &gt;&gt; local.conf
+        echo SERVICE_PASSWORD=supersecrete &gt;&gt; local.conf
+        echo SERVICE_TOKEN=1qaz2wsx &gt;&gt; local.conf
+        echo DATABASE_TYPE=mysql &gt;&gt; local.conf
+        echo SERVICE_HOST=192.168.236.11 &gt;&gt; local.conf
+        echo MYSQL_HOST=192.168.236.11 &gt;&gt; local.conf
+        echo RABBIT_HOST=192.168.236.11 &gt;&gt; local.conf
+        echo GLANCE_HOSTPORT=192.168.236.11:9292 &gt;&gt; local.conf
+        echo ENABLED_SERVICES=n-cpu,n-net,n-api,c-sch,c-api,c-vol &gt;&gt; local.conf
+
+        mv local.conf /home/vagrant/devstack
+        chown vagrant:vagrant /home/vagrant/devstack/local.conf
+        
+        #for i in `seq 2 10`; do /opt/stack/nova/bin/nova-manage fixed reserve 10.4.128.$i; done
+        sudo -u vagrant -i $0  # script calling itself as the vagrant user
+        ;;
+    *) 
+        #echo &quot;then: running as vagrant user&quot;
+        #echo &quot;doing the vagrant user&#39;s tasks&quot;
+        #echo &quot;########################################&quot;
+        #echo &quot;I going to run ./stack.sh as `whoami`&quot;
+        #echo &quot;########################################&quot;
+        cd /home/vagrant/devstack
+        ./stack.sh
+        ;;
+esac
+</pre></div>
+</div>
+</div>
+<div class="section" id="vagrantfile">
+<h3><a class="toc-backref" href="#id9">Vagrantfile</a><a class="headerlink" href="#vagrantfile" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://github.com/cloudmesh/reservation/blob/master/scripts/multinode/Vagrantfile">Vagrantfile</a></p>
+<div class="highlight-python"><div class="highlight"><pre>######################################################################
+# Name        : Vagrantfile
+# Author      : Cloudmesh Team
+# Description : The code is based on the setup guide from the URL given: 
+#               http://devstack.org/guides/multinode-lab.html
+#             : Requires vagrant-hostmanager plugin
+######################################################################
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+######################################################################
+
+# Check if vagrant-hostmanager plugin is installed. 
+# If not raise an error.
+
+unless Vagrant.has_plugin?(&quot;vagrant-hostmanager&quot;)
+  raise &#39;Install vagrant-hostmanager plugin: vagrant plugin install vagrant-hostmanager&#39;
+end
+
+######################################################################
+# Add details about the controler node:
+######################################################################
+
+controllers = [{name: &#39;controller&#39;, ip: &#39;192.168.236.11&#39;, memory: &#39;2048&#39;, cpu: &#39;2&#39;}]
+
+######################################################################
+# Add details about new worker nodes to the list below:               
+######################################################################
+
+workers = [{name: &#39;compute1&#39;, ip: &#39;192.168.236.12&#39;, memory: &#39;1024&#39;, cpu: &#39;2&#39;},
+           {name: &#39;compute2&#39;, ip: &#39;192.168.236.13&#39;, memory: &#39;1024&#39;, cpu: &#39;2&#39;}]
+
+######################################################################
+#   NO MORE AMENDMENTS FROM HERE ON - THANK YOU                       
+######################################################################
+
+VAGRANTFILE_API_VERSION = &quot;2&quot;
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+ 
+  config.vm.box = &quot;precise64&quot;
+  config.vm.box_url = &quot;http://files.vagrantup.com/precise64.box&quot;
+  config.hostmanager.enabled = true
+   
+  # Turn off shared folders
+  config.vm.synced_folder &quot;.&quot;, &quot;/vagrant&quot;, id: &quot;vagrant-root&quot;, disabled: true
+ 
+ # Begin controller
+  controllers.each do |contrhost|
+    config.vm.define &quot;controller&quot; do |controller_config|
+      controller_config.vm.hostname = contrhost[:name]
+      controller_config.vm.boot_timeout = 600
+      # controller_config.vm.provision &quot;shell&quot;, inline: $script
+      # eth1 configured in the 192.168.236.0/24 network
+      controller_config.vm.network &quot;private_network&quot;, ip: contrhost[:ip]
+      controller_config.vm.provision &quot;shell&quot;, path: &quot;install-controller.sh&quot;
+      controller_config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 8000
+      controller_config.vm.network &quot;forwarded_port&quot;, guest: 5000, host: 6000
+      controller_config.vm.network &quot;forwarded_port&quot;, guest: 8774, host: 8774
+
+      controller_config.vm.provider &quot;virtualbox&quot; do |v|
+          v.customize [&quot;modifyvm&quot;, :id, &quot;--memory&quot;, contrhost[:memory]]
+          v.customize [&quot;modifyvm&quot;, :id, &quot;--cpus&quot;, contrhost[:cpu]]
+      end
+    end
+  end
+  # End controller
+
+  # Begin Workers
+  workers.each do |host|
+    config.vm.define host[:name] do |node|
+      node.vm.hostname = host[:name]
+      # node.vm.provision &quot;shell&quot;, inline: $script
+      node.vm.network :private_network, ip: host[:ip], netmask: &#39;255.255.255.0&#39;
+      node.vm.provision &quot;shell&quot;, path: &quot;install-compute.sh&quot;
+      node.vm.provider &quot;virtualbox&quot; do |v|
+        v.customize [&quot;modifyvm&quot;, :id, &quot;--memory&quot;, host[:memory]]
+        v.customize [&quot;modifyvm&quot;, :id, &quot;--cpus&quot;, host[:cpu]]
+        v.customize [&quot;modifyvm&quot;, :id, &quot;--nic3&quot;, &quot;intnet&quot;]
+      end
+    end
+  end
+  # End Workers
+end
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Gregor von Laszewski for  FutureGrid.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

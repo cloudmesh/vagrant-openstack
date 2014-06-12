@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Vagrant &mdash; Cloudmesh 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Cloudmesh 0.1 documentation" href="index.html" />
+    <link rel="prev" title="Changing the scheduler in openstack" href="scheduler.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><img src="_static/fg-logo-white-24x36.png">
+          Cloudmesh</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html#links">Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc.html">Adding to the Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#creating-the-documentation-locally">Creating the documentation locally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#rst-documentation">RST Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#gh-pages">gh-pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#published-documentation">Published Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="devstack.html">DevStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi.html">Multiworker Devstack for Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#testing-the-setup">Testing the setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#shell-scripts">Shell Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#controller-install-controller-sh">Controller: install-controller.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#compute-install-compute-sh">Compute: install-compute.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#vagrantfile">Vagrantfile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiUsingChef.html">Multi worker DevStack using Vagrant and Chef Cookbooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#openstack-distributions">OpenStack Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#multi-node-openstack-install">Multi-Node OpenStack Install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scheduler.html">Changing the scheduler in openstack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#important-directories-files">Important directories/files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#creating-a-brand-new-scheduler">Creating a brand new scheduler.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#changes-to-the-configuration-file">Changes to the configuration file:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#testing-the-scheduler">Testing the scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#using-the-filtered-scheduler-and-building-a-new-custom-filter">Using the filtered scheduler and building a new custom filter:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#modifying-the-config-file">Modifying the Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#summary">Summary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#deployment-building-a-new-scheduler">Deployment: Building a new scheduler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#deployment-using-existing-filtered-scheduler-with-new-filters">Deployment - Using existing filtered scheduler with new filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#id6">Testing:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Vagrant</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#commands">Commands</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="scheduler.html" title="Previous Chapter: Changing the scheduler in openstack"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Changing the sch...</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/vagrant.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="vagrant">
+<h1>Vagrant<a class="headerlink" href="#vagrant" title="Permalink to this headline">¶</a></h1>
+<p>Vagrant is a tool that allows you to create, configure reproducible development environments. In other words it allows you to setup a Virtual Machine and provision the necessary software on the fly.  Once the environment has been created, it can be saved and then distributed to any one interested in using the environment.</p>
+<p>So when a VM has been downloaded from Vagrant&#8217;s repository, a hypervisor is required to run the Virtual Machines. The hypervisors are called as &#8220;Providers&#8221; in Vagrant world. Vagrant come with support for Virtual Box by default. But there are plugins to support other providers such as VMWare, AWS etc. So before we install Vagrant, we need to install Virtual Box.</p>
+<p>The steps to install Vagrant and provision a VM is given below:</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Install Virtual Box<ul>
+<li>Download and install Virtual Box installer from the link: <a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></li>
+</ul>
+</li>
+<li>Download and install Vagrant<ul>
+<li>Vagrant can be downloaded from the following link: <a class="reference external" href="http://www.vagrantup.com/downloads">http://www.vagrantup.com/downloads</a></li>
+</ul>
+</li>
+<li>Once Vagrant is installed, path to Vagrant binary is added automatically to the system path and will be available to run from the command line. Vagrant will be installed under <em>/Applications/Vagrant</em> in Mac OS and under <em>/opt/vagrant</em> in Linux.</li>
+</ul>
+</div>
+<div class="section" id="commands">
+<h2>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h2>
+<p>Once vagrant is installed, run the command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">vagrant</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
+<p>Vagrant maintains different projects under directories. To setup up a
+new project, create a new directory in your preferred location. within
+the project run the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre>vagrant init precise32 http://files.vagrantup.com/precise32.box
+</pre></div>
+</div>
+<p>The above step will download the box file (which are nothing but base
+images) for a 32 bit Ubuntu VM from Vagrant&#8217;s repository and will
+create a file called Vagrantfile which contains certain configuration
+details.  We will look into the details later.  To download a 64 bit
+virtual machine, run the following:</p>
+<div class="highlight-python"><div class="highlight"><pre>vagrant init precise64 http://files.vagrantup.com/precise32.box
+</pre></div>
+</div>
+<p>Now start the new VM by running the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre>vagrant up
+</pre></div>
+</div>
+<p>The above step will start the VM within Virtual Box. To log into the Virtual Machine, run the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre>vagrant ssh
+</pre></div>
+</div>
+<p>VM can be suspended using the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre>vagrant suspend
+</pre></div>
+</div>
+<p>To check the status of the VMs, run the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre>vagrant status
+</pre></div>
+</div>
+<p>When you are done with your VM, stop the Virtual Machine by running the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre>vagrant halt
+</pre></div>
+</div>
+<p>To completely remove the Virtual Machine run the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre>vagrant destroy
+</pre></div>
+</div>
+<p>The VM created above was a very basic one without much software on
+it. The process of installing the necessary software on the fly while
+the system is booting is termed as <strong>provisioning</strong>. Vagrant does
+automated provisioning and runs some provisioners whenever we issue
+the:</p>
+<div class="highlight-python"><div class="highlight"><pre>vagrant up
+</pre></div>
+</div>
+<p>command. The details about provisioning a software
+will be explained in details later.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Gregor von Laszewski for  FutureGrid.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

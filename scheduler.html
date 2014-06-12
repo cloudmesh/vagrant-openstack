@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Changing the scheduler in openstack &mdash; Cloudmesh 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Cloudmesh 0.1 documentation" href="index.html" />
+    <link rel="next" title="Vagrant" href="vagrant.html" />
+    <link rel="prev" title="Multi worker DevStack using Vagrant and Chef Cookbooks" href="multiUsingChef.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><img src="_static/fg-logo-white-24x36.png">
+          Cloudmesh</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html#links">Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc.html">Adding to the Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#creating-the-documentation-locally">Creating the documentation locally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#rst-documentation">RST Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#gh-pages">gh-pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#published-documentation">Published Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="devstack.html">DevStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi.html">Multiworker Devstack for Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#testing-the-setup">Testing the setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#shell-scripts">Shell Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#controller-install-controller-sh">Controller: install-controller.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#compute-install-compute-sh">Compute: install-compute.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#vagrantfile">Vagrantfile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="multiUsingChef.html">Multi worker DevStack using Vagrant and Chef Cookbooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#openstack-distributions">OpenStack Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiUsingChef.html#multi-node-openstack-install">Multi-Node OpenStack Install</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Changing the scheduler in openstack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#important-directories-files">Important directories/files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-brand-new-scheduler">Creating a brand new scheduler.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#changes-to-the-configuration-file">Changes to the configuration file:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-the-scheduler">Testing the scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-filtered-scheduler-and-building-a-new-custom-filter">Using the filtered scheduler and building a new custom filter:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modifying-the-config-file">Modifying the Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#deployment-building-a-new-scheduler">Deployment: Building a new scheduler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deployment-using-existing-filtered-scheduler-with-new-filters">Deployment - Using existing filtered scheduler with new filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Testing:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vagrant.html#commands">Commands</a></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Changing the scheduler in openstack</a><ul>
+<li><a class="reference internal" href="#important-directories-files">Important directories/files</a></li>
+<li><a class="reference internal" href="#creating-a-brand-new-scheduler">Creating a brand new scheduler.</a><ul>
+<li><a class="reference internal" href="#changes-to-the-configuration-file">Changes to the configuration file:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing-the-scheduler">Testing the scheduler</a></li>
+<li><a class="reference internal" href="#using-the-filtered-scheduler-and-building-a-new-custom-filter">Using the filtered scheduler and building a new custom filter:</a><ul>
+<li><a class="reference internal" href="#modifying-the-config-file">Modifying the Config file</a></li>
+<li><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#code">Code</a></li>
+<li><a class="reference internal" href="#summary">Summary</a><ul>
+<li><a class="reference internal" href="#deployment-building-a-new-scheduler">Deployment: Building a new scheduler</a></li>
+<li><a class="reference internal" href="#deployment-using-existing-filtered-scheduler-with-new-filters">Deployment - Using existing filtered scheduler with new filters</a></li>
+<li><a class="reference internal" href="#id6">Testing:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="multiUsingChef.html" title="Previous Chapter: Multi worker DevStack using Vagrant and Chef Cookbooks"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Multi worker Dev...</span>
+    </a>
+  </li>
+  <li>
+    <a href="vagrant.html" title="Next Chapter: Vagrant"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Vagrant &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/scheduler.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="changing-the-scheduler-in-openstack">
+<h1>Changing the scheduler in openstack<a class="headerlink" href="#changing-the-scheduler-in-openstack" title="Permalink to this headline">¶</a></h1>
+<p>This section expects a devstack deployment.</p>
+<p>Thus, if you have not deployed devstack you should first take a look
+at the section on devstack deployment.</p>
+<p>The a scheduler in openstack makes scheduling decisions in one
+of the following ways:</p>
+<ol class="arabic simple">
+<li><strong>Creating a new Scheduler from scratch:</strong> Here we create new a brand
+new scheduler. The advantage of this approach is that we have
+complete freedom to create the scheduler in whatever way need. The
+disadvantage is that the openstack schedulers have a lot already
+built into them. We can not benefit from them.</li>
+<li><strong>Using the filtered scheduler provided by openstack and creating
+custom filters:</strong> Openstack has an inbuilt filtered scheduler. This
+filtered scheduler uses filters which tell if a host is available
+for booting the instance or not. Openstack already provides a
+number of filters and also a provision to create new filters. The
+advantage of this method is that any new filter can be combined
+with the existing filters. THis also implies that multiple filters
+can be specified to the filter scheduler. The disadvantage is that
+we are restricted to the filter based framework.</li>
+</ol>
+<div class="section" id="important-directories-files">
+<h2>Important directories/files<a class="headerlink" href="#important-directories-files" title="Permalink to this headline">¶</a></h2>
+<p>When your openstack is setup is setup (at least using dev-stack) you
+will find the deployment of openstack nova in the <strong>/opt/stack/nova</strong></p>
+<p>This is the base folder for the nova project. All your code has to be
+somewhere within this path. For creating schedulers we are
+specifically interested in nova.scheduler module and sub modules
+<strong>(/opt/stack/nova/nova/scheduler</strong> or <strong>/opt/stack/nova/nova/scheduler/filters)</strong>. Though the custom made schedulers/ filters can be placed
+anywhere within the nova project folder it would be easier if we kept
+it within the above mentioned folder. Thus any of the schedulers/filters can be accessed from the
+<strong>nova.scheduler</strong> module or <strong>nova.scheduler.filter</strong> module</p>
+<p>The nova <strong>configuration</strong> file can be found at <strong>/etc/nova/nova.conf</strong></p>
+<p>Most of the configuration is kept in this configuration file.</p>
+<p>We would need to modify this configuration file if we wanted change the scheduler/filter.</p>
+</div>
+<div class="section" id="creating-a-brand-new-scheduler">
+<h2>Creating a brand new scheduler.<a class="headerlink" href="#creating-a-brand-new-scheduler" title="Permalink to this headline">¶</a></h2>
+<p>For creating a new scheduler the nova.scheduler.driver.Scheduler has
+to be implemented. This class has the following methods</p>
+<ol class="arabic simple">
+<li>update_service_capabilities</li>
+<li>hosts_up</li>
+<li>group_hosts</li>
+<li>schedule_run_instance (required to be implemented) - This is the method which schedules an
+instance. It contains a remote procedure call.</li>
+<li>select_destinations (required to be impleneted)- This gives a list of destination hosts(workers/compute nodes) that
+can be used.</li>
+</ol>
+<p>Some methods need to implemented as indicated above. The others have a default implementation.</p>
+<p>The code can be found in <strong>scripts/scheduler/ip_scheduler.py</strong> in the
+<strong>reservation project</strong> (<a class="reference external" href="https://github.com/cloudmesh/reservation/blob/master/scripts/scheduler/ip_scheduler.py">github link</a>).</p>
+<p>Here the scheduler is implemented
+as a random node selector based on IP and hostname. This scheduler code must be placed in
+placed <strong>/opt/stack/nova/nova/scheduler</strong></p>
+<p>Also <cite>host_name</cite> prefixes may have to be changed as per the names of
+your host nodes(aka compute node or worker nodes). My host node is named ‘sridhar’ so I changed the
+hostname_prefix value to ‘sridhar’</p>
+<p>** WHAT IS A HOSTNODE??? IS THIS THE HOSTNAME??? **</p>
+<div class="section" id="changes-to-the-configuration-file">
+<h3>Changes to the configuration file:<a class="headerlink" href="#changes-to-the-configuration-file" title="Permalink to this headline">¶</a></h3>
+<p>Modify the scheduler information in <strong>/etc/nova/nova.conf</strong> file. Lookup for the old scheduler information (it is the variable called scheduler_driver) and change it to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">scheduler_driver</span><span class="o">=</span><span class="n">nova</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">ip_scheduler</span><span class="o">.</span><span class="n">IPScheduler</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="testing-the-scheduler">
+<h2>Testing the scheduler<a class="headerlink" href="#testing-the-scheduler" title="Permalink to this headline">¶</a></h2>
+<p>In dev stack the output is shown on different screens. Out of the
+various screens. There are various screens for different purposes like showing the status of scheduler, disk drives, etc. We are interested in the <strong>n-sch screen (screen 10)</strong> which is the screen which shows how the scheduling has been done.
+If you have your devstack running then the following command brings up all of the screens. This would not work if you already have screens open somewhere.:</p>
+<div class="highlight-python"><div class="highlight"><pre>screen -r stack
+</pre></div>
+</div>
+<p>Now you need to go to screen 10. You could go to screen 9 <strong>( Ctrl + A + 9)</strong>
+and then do a next <strong>(Ctrl + A + N)</strong>. All the output related to the
+booting of vms would be in on this screen.</p>
+<p>Also after every change to either the filter/scheduler class or config
+file, you need to exit(Ctrl + C) on this screen and re-run the last
+command. This will update to the latest version of the scheduler/
+conf. <strong>Do not forget to do this</strong>.</p>
+<p>To test the scheduler you will have to boot a new instance. But before
+that you need to provide the user information. The easy way to
+do this is to go to where you have the devstack source directory(This is the directory you have cloned devstack into). Once you have done that for admin mode do:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ source openrc ‘admin’
+</pre></div>
+</div>
+<p>There is also a non-admin mode called <strong>demo</strong> configured in the openrc. if you do not want the admin mode, you can use the demo mode.:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ source openrc demo
+</pre></div>
+</div>
+<p>You can boot an instance. For booting the instance do the following:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova boot &lt;instance_name&gt; --image=&lt;image_id&gt; --flavor=&lt;flavor_id&gt;
+</pre></div>
+</div>
+<p>The available images and flavors can be looked up as follows.:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova image-list
+$ nova flavor-list
+</pre></div>
+</div>
+<p>While selecting a flavor keep in mind the memory you have on machine. If the host machines does not have enough memory, it will cause
+problems. To simplify testing you can use flavor = 1. The boot is asynchronous and you will have to check the status of the boot. to check the boot status you can do:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova list
+</pre></div>
+</div>
+<p>Also if you look into the n-sch screen you will have log information about the booting of the new instance.</p>
+</div>
+<div class="section" id="using-the-filtered-scheduler-and-building-a-new-custom-filter">
+<h2>Using the filtered scheduler and building a new custom filter:<a class="headerlink" href="#using-the-filtered-scheduler-and-building-a-new-custom-filter" title="Permalink to this headline">¶</a></h2>
+<p>To build a custom filter you need to make sure to do the following:</p>
+<ol class="arabic simple">
+<li>Create a class which inherits nova.scheduler.filters.BaseHostFilter</li>
+<li>Implement the <cite>host_passes method</cite>: This method for a given set of inputs
+returns a boolean value corresponding to whether the host passes
+the criteria posed by the filter. All the hosts that pass the
+criteria return true.</li>
+</ol>
+<p>The code provided in <strong>scripts/scheduler/temp.py under the reservation project</strong> (<a class="reference external" href="https://github.com/cloudmesh/reservation/blob/master/scripts/scheduler/temp.py">github link</a>)</p>
+<p>This is an example which uses some pseudo data to check whether or not the host passes the criteria. You may have to change the <cite>host_names</cite> to correspond to the
+values you have in your hosts list(list of worker/compute nodes registered) Place the code in <strong>/opt/stack/nova/nova/scheduler/filters/temp.py</strong> .</p>
+<p>This filter looks up the temperature for the specific host from a made-up dictionary and also the threshold value and passes the host if the temperature is less than the threshold.</p>
+<p><strong>GEREGOR GOT TILL HERE</strong></p>
+<div class="section" id="modifying-the-config-file">
+<h3>Modifying the Config file<a class="headerlink" href="#modifying-the-config-file" title="Permalink to this headline">¶</a></h3>
+<p>Modify the filter information in <strong>/etc/nova/nova.conf</strong> file.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">scheduler_driver</span> <span class="o">=</span> <span class="n">nova</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">filter_scheduler</span><span class="o">.</span><span class="n">FilterScheduler</span>
+<span class="n">scheduler_available_filters</span> <span class="o">=</span> <span class="n">nova</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">temp</span><span class="o">.</span><span class="n">BasicTempFilter</span>
+<span class="n">scheduler_default_filters</span> <span class="o">=</span> <span class="n">BasicTempFilter</span>
+</pre></div>
+</div>
+<p>Here the first line tells that we would like to use the FilteredScheduler which is the standard scheduler used by nova to handle filtered scheduling taskes. The second line tells us where to look for available filters. There can be multiple lines for multiple filters.However we can add any of the filters we need using the scheduler_available_filters. The
+default_filters tells what default_filters you would like to use by default. This can be a comma separated string if you want to specify multiple filters. However it is necessary that the default filters are included in the available filters.</p>
+</div>
+<div class="section" id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h3>
+<p>Testing can be done in a way similar to the one explained in the
+section where the scheduler is created from scratch.</p>
+</div>
+</div>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<p>The source files used in this example are</p>
+<ol class="arabic simple">
+<li>A new scheduler: <strong>scripts/scheduler/ip_scheduler.py under the reservation project</strong> (<a class="reference external" href="https://github.com/cloudmesh/reservation/blob/master/scripts/scheduler/ip_scheduler.py">github link</a>)</li>
+<li>A filter for the filtered scheduler: <strong>scripts/scheduler/temp.py under the reservation project</strong> (<a class="reference external" href="https://github.com/cloudmesh/reservation/blob/master/scripts/scheduler/temp.py">github link</a>)</li>
+</ol>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial assumes that the user has a devstack deployment.</p>
+<div class="section" id="deployment-building-a-new-scheduler">
+<h3>Deployment: Building a new scheduler<a class="headerlink" href="#deployment-building-a-new-scheduler" title="Permalink to this headline">¶</a></h3>
+<p>** WHERE IS THE CODE ON GITHUB??**</p>
+<ol class="arabic">
+<li><p class="first">Copy <strong>scripts/scheduler/ip_scheduler.py under the reservation project</strong> (<a class="reference external" href="https://github.com/cloudmesh/reservation/blob/master/scripts/scheduler/ip_scheduler.py">github link</a>) to the /opt/stack/nova/nova/scheduler</p>
+</li>
+<li><p class="first">Make changes to the hostname in the file. Find the word ‘sridhar’
+and replace it with the name of your devstack compute/worker node.</p>
+</li>
+<li><p class="first">Make the following modifications to the configuration( <strong>/etc/nova/nova.conf</strong> ):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">scheduler_driver</span><span class="o">=</span><span class="n">nova</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">ip_scheduler</span><span class="o">.</span><span class="n">IPScheduler</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="deployment-using-existing-filtered-scheduler-with-new-filters">
+<h3>Deployment - Using existing filtered scheduler with new filters<a class="headerlink" href="#deployment-using-existing-filtered-scheduler-with-new-filters" title="Permalink to this headline">¶</a></h3>
+<p>#. Copy <strong>scripts/scheduler/temp.py under the reservation project</strong> (<a class="reference external" href="https://github.com/cloudmesh/reservation/blob/master/scripts/scheduler/temp.py">github link</a>)
+file and place to the <strong>/opt/stack/nova/nova/scheduler/filters/</strong></p>
+<ol class="arabic">
+<li><p class="first">Change the host_name in the downloaded file to whatever your
+host_name is. This should be name of the compute node/worker node. Search for the occurrence of the word ‘sridhar’. You can
+also add other hosts you have to the dictionary.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Make the following modifications to the configuration( <strong>/etc/nova/nova.conf</strong> )::</dt>
+<dd><p class="first last">scheduler_driver = nova.scheduler.filter_scheduler.FilterScheduler
+scheduler_available_filters = nova.scheduler.filters.temp.BasicTempFilter
+scheduler_default_filters = BasicTempFilter</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="id6">
+<h3>Testing:<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">If you dont have the screens running start them:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ screen -r stack
+</pre></div>
+</div>
+</li>
+<li><p class="first">Navigate to the n-sch screen(screen 10). All your output regarding
+booting instances can be seen on this terminal. Do <strong>Ctrl + A + 9</strong> followed by <strong>Ctrl + A + N</strong></p>
+</li>
+<li><p class="first">If the screen was already running exit the n-sch screen(<strong>Ctrl+C</strong> when you are on the n-sch screen) followed by running the last command(use Up arrow). Do this every time you change the configuration file or code</p>
+</li>
+<li><p class="first">On a new terminal go to the devstack source directory and run:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ source openrc demo
+</pre></div>
+</div>
+</li>
+<li><p class="first">Copy the image id of favorite image. Image-ids can be obtained by:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova image-list
+</pre></div>
+</div>
+</li>
+<li><p class="first">Boot instance using:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova boot &lt;instance_name&gt; --image=&lt;image_id&gt; --flavor=1
+</pre></div>
+</div>
+</li>
+<li><p class="first">View status(gives status of all instances booted):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nova list
+</pre></div>
+</div>
+</li>
+<li><p class="first">See the n-sch screen if there were any errors.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Gregor von Laszewski for  FutureGrid.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

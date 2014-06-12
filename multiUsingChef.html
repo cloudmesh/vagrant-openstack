@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Multi worker DevStack using Vagrant and Chef Cookbooks &mdash; Cloudmesh 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Cloudmesh 0.1 documentation" href="index.html" />
+    <link rel="next" title="Changing the scheduler in openstack" href="scheduler.html" />
+    <link rel="prev" title="Multiworker Devstack for Vagrant" href="multi.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><img src="_static/fg-logo-white-24x36.png">
+          Cloudmesh</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html#links">Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc.html">Adding to the Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#creating-the-documentation-locally">Creating the documentation locally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#rst-documentation">RST Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#gh-pages">gh-pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#published-documentation">Published Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="devstack.html">DevStack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi.html">Multiworker Devstack for Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#testing-the-setup">Testing the setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi.html#shell-scripts">Shell Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#controller-install-controller-sh">Controller: install-controller.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#compute-install-compute-sh">Compute: install-compute.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi.html#vagrantfile">Vagrantfile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Multi worker DevStack using Vagrant and Chef Cookbooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#openstack-distributions">OpenStack Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multi-node-openstack-install">Multi-Node OpenStack Install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scheduler.html">Changing the scheduler in openstack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#important-directories-files">Important directories/files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#creating-a-brand-new-scheduler">Creating a brand new scheduler.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#changes-to-the-configuration-file">Changes to the configuration file:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#testing-the-scheduler">Testing the scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#using-the-filtered-scheduler-and-building-a-new-custom-filter">Using the filtered scheduler and building a new custom filter:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#modifying-the-config-file">Modifying the Config file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html#summary">Summary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#deployment-building-a-new-scheduler">Deployment: Building a new scheduler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#deployment-using-existing-filtered-scheduler-with-new-filters">Deployment - Using existing filtered scheduler with new filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scheduler.html#id6">Testing:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vagrant.html">Vagrant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vagrant.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vagrant.html#commands">Commands</a></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Multi worker DevStack using Vagrant and Chef Cookbooks</a><ul>
+<li><a class="reference internal" href="#openstack-distributions">OpenStack Distributions</a></li>
+<li><a class="reference internal" href="#multi-node-openstack-install">Multi-Node OpenStack Install</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="multi.html" title="Previous Chapter: Multiworker Devstack for Vagrant"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Multiworker Devs...</span>
+    </a>
+  </li>
+  <li>
+    <a href="scheduler.html" title="Next Chapter: Changing the scheduler in openstack"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Changing the sch... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/multiUsingChef.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="multi-worker-devstack-using-vagrant-and-chef-cookbooks">
+<h1>Multi worker DevStack using Vagrant and Chef Cookbooks<a class="headerlink" href="#multi-worker-devstack-using-vagrant-and-chef-cookbooks" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="openstack-distributions">
+<h2>OpenStack Distributions<a class="headerlink" href="#openstack-distributions" title="Permalink to this headline">¶</a></h2>
+<p>OpenStack is a opensource and a very complex code set. Due to the complexity involved in setting up an OpenStack Cloud, companies such as RackSpace, Redhat, Mirantis etc., took the OpenStack code and packaged it for easy deployment by clients. In addition to the core OpenStack code, the vendors would add addtional componenets to ease the deployment along with value add features such as monitoring etc. For example, Rackspace has taken the OpenStack code and packaged it along with value add features such as High Availability componenets, Chef Server etc.</p>
+<p>An explanation about difference between OpenStack Distribution and Rackspace Private Cloud can be found in the links below:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.rackspace.com/blog/openstack-the-project-the-rackspace-product-and-the-rackspace-service/">http://www.rackspace.com/blog/openstack-the-project-the-rackspace-product-and-the-rackspace-service/</a></li>
+<li><a class="reference external" href="http://www.rackspace.com/blog/rackspace-private-cloud-is-open/">http://www.rackspace.com/blog/rackspace-private-cloud-is-open/</a></li>
+<li><a class="reference external" href="http://www.rackspace.com/information/legal/rpcswpackages">http://www.rackspace.com/information/legal/rpcswpackages</a></li>
+</ul>
+<p>There are various cookbooks made available by vendors which can be used to setup a cluster.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We are trying to plugin a new scheduler which works based on Calendar events. When the cluster is being setup using Cookbooks as shown in the steps below, we will not be able to plugin a new scheduler as there is no provision to do one. This has been clarified with people from Rackspace. Aravindh had raised a query with Rackspace and they confirmed that they is no provision at the moment and they had asked Aravindh to see if he could look into the Cookbooks and start from there.</p>
+</div>
+</div>
+<div class="section" id="multi-node-openstack-install">
+<h2>Multi-Node OpenStack Install<a class="headerlink" href="#multi-node-openstack-install" title="Permalink to this headline">¶</a></h2>
+<p>The vagrant script below uses the cookbooks from Rackspace to setup a cluster with the following nodes:</p>
+<ul class="simple">
+<li>Chef</li>
+<li>Controller</li>
+<li>Compute1</li>
+<li>Compute2</li>
+<li>Cinder</li>
+</ul>
+<p>The steps to be followed to create a cluster for the above nodes are
+given below:</p>
+<ul class="simple">
+<li>mkdir havana</li>
+<li>cd havana</li>
+<li>vagrant init</li>
+</ul>
+<p>Replace the contents of the Vagrantfile generated in the previous step with the contents below:</p>
+<div class="highlight-python"><div class="highlight"><pre> # -*- mode: ruby -*-
+ # vi: set ft=ruby :
+
+ VAGRANTFILE_API_VERSION = &quot;2&quot;
+ $script = &lt;&lt;SCRIPT
+ echo root:vagrant | chpasswd
+ cat &lt;&lt; EOF &gt;&gt; /etc/hosts
+  192.168.236.10 chef
+  192.168.236.11 controller
+  192.168.236.12 compute1
+  192.168.236.13 compute2
+  192.168.236.14 cinder
+ EOF
+ SCRIPT
+ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+ config.vm.box = &quot;precise64&quot;
+
+ # Turn off shared folders
+ config.vm.synced_folder &quot;.&quot;, &quot;/vagrant&quot;, id: &quot;vagrant-root&quot;, disabled: true
+
+ # Begin chef
+ config.vm.define &quot;chef&quot; do |chef_config|
+  chef_config.vm.hostname = &quot;chef&quot;
+  chef_config.vm.provision &quot;shell&quot;, inline: $script
+  # eth1 configured in the 192.168.236.0/24 network
+  chef_config.vm.network &quot;private_network&quot;, ip: &quot;192.168.236.10&quot;
+
+  chef_config.vm.provider &quot;virtualbox&quot; do |v|
+   v.customize [&quot;modifyvm&quot;, :id, &quot;--memory&quot;, &quot;512&quot;]
+   v.customize [&quot;modifyvm&quot;, :id, &quot;--cpus&quot;, &quot;1&quot;]
+  end
+ end
+ # End chef
+
+# Begin controller
+ config.vm.define &quot;controller&quot; do |controller_config|
+  controller_config.vm.hostname = &quot;controller&quot;
+  controller_config.vm.boot_timeout = 600
+  controller_config.vm.provision &quot;shell&quot;, inline: $script
+  # eth1 configured in the 192.168.236.0/24 network
+  controller_config.vm.network &quot;private_network&quot;, ip: &quot;192.168.236.11&quot;
+
+  controller_config.vm.provider &quot;virtualbox&quot; do |v|
+   v.customize [&quot;modifyvm&quot;, :id, &quot;--memory&quot;, &quot;2048&quot;]
+   v.customize [&quot;modifyvm&quot;, :id, &quot;--cpus&quot;, &quot;1&quot;]
+  end
+ end
+ # End controller
+
+ # Begin compute1
+ config.vm.define &quot;compute1&quot; do |compute1_config|
+  compute1_config.vm.hostname = &quot;compute1&quot;
+  compute1_config.vm.provision &quot;shell&quot;, inline: $script
+  # eth1 configured in the 192.168.236.0/24 network
+  compute1_config.vm.network &quot;private_network&quot;, ip: &quot;192.168.236.12&quot;
+
+  compute1_config.vm.provider &quot;virtualbox&quot; do |v|
+   v.customize [&quot;modifyvm&quot;, :id, &quot;--memory&quot;, &quot;1024&quot;]
+   v.customize [&quot;modifyvm&quot;, :id, &quot;--cpus&quot;, &quot;2&quot;]
+   # eth2 left unconfigured so the Chef Cookbooks can configure it
+   v.customize [&quot;modifyvm&quot;, :id, &quot;--nic3&quot;, &quot;intnet&quot;]
+  end
+ end
+ # End compute1
+
+ # Begin compute2
+ config.vm.define &quot;compute2&quot; do |compute2_config|
+  compute2_config.vm.hostname = &quot;compute2&quot;
+  compute2_config.vm.provision &quot;shell&quot;, inline: $script
+  # eth1 configured in the 192.168.236.0/24 network
+  compute2_config.vm.network &quot;private_network&quot;, ip: &quot;192.168.236.13&quot;
+
+  compute2_config.vm.provider &quot;virtualbox&quot; do |v|
+   v.customize [&quot;modifyvm&quot;, :id, &quot;--memory&quot;, &quot;1024&quot;]
+   v.customize [&quot;modifyvm&quot;, :id, &quot;--cpus&quot;, &quot;2&quot;]
+   # eth2 left unconfigured so the Chef Cookbooks can configure it
+   v.customize [&quot;modifyvm&quot;, :id, &quot;--nic3&quot;, &quot;intnet&quot;]
+  end
+ end
+ # End compute2
+ # Begin cinder
+ config.vm.define &quot;cinder&quot; do |cinder_config|
+  cinder_config.vm.hostname = &quot;cinder&quot;
+  cinder_config.vm.provision &quot;shell&quot;, inline: $script
+  # eth1 configured in the 192.168.236.0/24 network
+  cinder_config.vm.network &quot;private_network&quot;, ip: &quot;192.168.236.14&quot;
+
+  cinder_config.vm.provider &quot;virtualbox&quot; do |v|
+   v.customize [&quot;modifyvm&quot;, :id, &quot;--memory&quot;, &quot;512&quot;]
+   v.customize [&quot;modifyvm&quot;, :id, &quot;--cpus&quot;, &quot;1&quot;]
+  end
+ end
+ # End cinder
+end
+</pre></div>
+</div>
+<ul class="simple">
+<li>Save the Vagranfile</li>
+<li>Run the command: <strong>vagrant up</strong></li>
+<li>The command will bring up all the nodes: chef, controller, compute1, compute2 and cinder.</li>
+<li>Horizon Dashboard should now be available at <a class="reference external" href="https://192.168.236.11/auth/login/">https://192.168.236.11/auth/login/</a>. The user name is &#8220;<strong>admin</strong>&#8221; and password is &#8220;<strong>secrete</strong>&#8220;</li>
+<li>When we bring up the cluster for the second time, we can shutdown the chef node: <strong>vagrant halt chef</strong></li>
+</ul>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Gregor von Laszewski for  FutureGrid.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

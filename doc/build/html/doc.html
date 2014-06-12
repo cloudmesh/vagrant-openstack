@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Adding to the Documentation &mdash; Cloudmesh 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Cloudmesh 0.1 documentation" href="index.html" />
+    <link rel="prev" title="Contact" href="contact.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><img src="_static/fg-logo-white-24x36.png">
+          Cloudmesh</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contact.html#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contact.html#blog">Blog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contact.html#repository">Repository</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Adding to the Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-the-documentation-locally">Creating the documentation locally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rst-documentation">RST Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gh-pages">gh-pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#published-documentation">Published Documentation</a></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Adding to the Documentation</a><ul>
+<li><a class="reference internal" href="#creating-the-documentation-locally">Creating the documentation locally</a></li>
+<li><a class="reference internal" href="#rst-documentation">RST Documentation</a></li>
+<li><a class="reference internal" href="#gh-pages">gh-pages</a></li>
+<li><a class="reference internal" href="#published-documentation">Published Documentation</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="contact.html" title="Previous Chapter: Contact"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Contact</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/doc.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="adding-to-the-documentation">
+<h1>Adding to the Documentation<a class="headerlink" href="#adding-to-the-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="creating-the-documentation-locally">
+<h2>Creating the documentation locally<a class="headerlink" href="#creating-the-documentation-locally" title="Permalink to this headline">¶</a></h2>
+<p>The documentation to this project is kept in doc/sources. You will
+find there a number of rst files. You can add new files, but must make
+sure that they are listed in the index.rst page. To create the
+documentation in your local directory, do:</p>
+<div class="highlight-python"><div class="highlight"><pre>cd doc
+make html
+</pre></div>
+</div>
+<p>Than open a browser on the file build/html/index.html. In OSX this can be done with:</p>
+<div class="highlight-python"><div class="highlight"><pre>open build/html/index.html
+</pre></div>
+</div>
+<p>On a Linux machien you may want to substitute the open call with firefox or another browser.
+To create a single html page you can say</p>
+<div class="highlight-python"><div class="highlight"><pre>cd doc
+make singlehtml
+open build/singlehtml/index.html
+</pre></div>
+</div>
+</div>
+<div class="section" id="rst-documentation">
+<h2>RST Documentation<a class="headerlink" href="#rst-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Information about rst and sphinx can be found at</p>
+<ul class="simple">
+<li><a class="reference external" href="http://sphinx-doc.org/rest.html">http://sphinx-doc.org/rest.html</a></li>
+<li><a class="reference external" href="http://sphinx-doc.org/markup/index.html#sphinxmarkup">http://sphinx-doc.org/markup/index.html#sphinxmarkup</a></li>
+</ul>
+</div>
+<div class="section" id="gh-pages">
+<h2>gh-pages<a class="headerlink" href="#gh-pages" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This step is only to be executed by Gregor von Laszewski</p>
+</div>
+<p>The document can be published into gh-pages as follows. Firts make
+sure you have everything committed. Second, go into
+the root directory of the project and say:</p>
+<div class="highlight-python"><div class="highlight"><pre>fab clean
+</pre></div>
+</div>
+<p>This will create a clean dir. Third, execute the command:</p>
+<div class="highlight-python"><div class="highlight"><pre>make gh-pages
+</pre></div>
+</div>
+<p>This will go into the barnch gh-pages, checkout the content under /tmp
+and recreate the documentation. Than it will check it back into the
+branch and do a git push. If everything is normal (no errors occur)
+you wil see the new documentation.</p>
+</div>
+<div class="section" id="published-documentation">
+<h2>Published Documentation<a class="headerlink" href="#published-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The final documentation will be located at</p>
+<ul class="simple">
+<li><a class="reference external" href="http://cloudmesh.github.com/cloudmesh/vagrant">http://cloudmesh.github.com/cloudmesh/vagrant</a></li>
+</ul>
+<p>If you find something missing communicate with Gregor von Laszewski (<a class="reference external" href="mailto:laszewski&#37;&#52;&#48;gmail&#46;com">laszewski<span>&#64;</span>gmail<span>&#46;</span>com</a>) so
+he updates the gh-pages.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Gregor von Laszewski for  FutureGrid.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
